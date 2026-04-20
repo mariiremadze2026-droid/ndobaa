@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ყვავილებიანი გვერდი</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(-45deg,#ffb6d9,#ffd6eb,#b8ffb8,#7be67b);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+/* ფონის მოძრაობა */
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    text-align:center;
+    z-index:2;
+}
+
+h1{
+    color:white;
+    font-size:42px;
+    text-shadow:2px 2px 8px rgba(0,0,0,0.2);
+    margin-bottom:20px;
+}
+
+p{
+    color:white;
+    font-size:20px;
+}
+
+/* ყვავილები */
+.flower{
+    position:absolute;
+    width:60px;
+    height:60px;
+    animation:float 8s linear infinite;
+}
+
+.petal{
+    position:absolute;
+    width:25px;
+    height:25px;
+    background:pink;
+    border-radius:50%;
+}
+
+.center{
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:yellow;
+    border-radius:50%;
+    top:20px;
+    left:20px;
+}
+
+.p1{top:0; left:18px;}
+.p2{top:18px; left:0;}
+.p3{top:18px; right:0;}
+.p4{bottom:0; left:18px;}
+.p5{top:5px; right:5px;}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) rotate(0deg);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-120px) rotate(360deg);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌸 ყვავილებიანი გვერდი 🌿</h1>
+    <p>ვარდისფერი და მწვანე ანიმაციური დიზაინი</p>
+</div>
+
+<!-- ყვავილები -->
+<div class="flower" style="left:10%; animation-delay:0s;">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+</div>
+
+<div class="flower" style="left:35%; animation-delay:2s;">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+</div>
+
+<div class="flower" style="left:60%; animation-delay:4s;">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+</div>
+
+<div class="flower" style="left:85%; animation-delay:6s;">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+</div>
+
+</body>
+</html>
