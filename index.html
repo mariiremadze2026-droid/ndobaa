@@ -297,6 +297,15 @@ body.day-phase .celestial{background:radial-gradient(circle at 40% 35%,#fff8a0 0
   </div>
 </section>
 
+<!-- შავი ეკრანი -->
+<div id="blackout" style="display:none;position:fixed;inset:0;background:#000;z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:20px">
+  <div style="font-size:56px;animation:pulse-eye 2s ease-in-out infinite">👁</div>
+  <div style="font-family:'Cinzel Decorative',serif;font-size:16px;color:#c9a84c;letter-spacing:.15em;text-transform:uppercase">მოწყობილობა გადაეცი</div>
+  <div id="blackout-name" style="font-family:'Cinzel',serif;font-size:26px;color:#f5f0e8;margin-top:4px"></div>
+  <div style="font-family:'IM Fell English',serif;font-style:italic;color:#7a7060;font-size:13px">დაჭირე ღილაკი მზადყოფნისას</div>
+  <button onclick="hideBlackout()" style="margin-top:20px;background:linear-gradient(135deg,#8e1a1a,#c0392b);color:#f5f0e8;border:1px solid rgba(192,57,43,.5);border-radius:12px;padding:14px 36px;font-family:'Cinzel',serif;font-size:14px;font-weight:600;letter-spacing:.1em;cursor:pointer;text-transform:uppercase;box-shadow:0 4px 20px rgba(192,57,43,.4)">✓ მზადა ვარ</button>
+</div>
+
 <!-- როლის გამოვლენა -->
 <section class="screen" id="screen-role-reveal">
   <div class="role-reveal-container">
@@ -582,8 +591,35 @@ function flipCard(){
 }
 function nextReveal(){
   S.ri++;
-  if(S.ri>=S.players.length)startNight();
-  else{renderReveal();window.scrollTo(0,0);}
+  if(S.ri>=S.players.length){
+    showBlackout('თამაში იწყება!', function(){ startNight(); });
+  } else {
+    var name = S.players[S.ri].name;
+    showBlackout(name, function(){ renderReveal(); window.scrollTo(0,0); });
+  }
+}
+
+function showBlackout(name, cb){
+  S._blackoutCb = cb;
+  document.getElementById('blackout-name').textContent = name;
+  var b = document.getElementById('blackout');
+  b.style.display = 'flex';
+  b.style.opacity = '0';
+  b.style.transition = 'opacity 0.3s ease';
+  // flip card back first
+  var card = document.getElementById('roleCard');
+  if(card) card.classList.remove('flipped');
+  document.getElementById('revealActions').style.display = 'none';
+  setTimeout(function(){ b.style.opacity = '1'; }, 10);
+}
+
+function hideBlackout(){
+  var b = document.getElementById('blackout');
+  b.style.opacity = '0';
+  setTimeout(function(){
+    b.style.display = 'none';
+    if(S._blackoutCb){ S._blackoutCb(); S._blackoutCb = null; }
+  }, 300);
 }
 
 // ===== NIGHT =====
